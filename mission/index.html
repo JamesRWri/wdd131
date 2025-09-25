@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Brigham Young University-Idaho Mission Statement recreation for WDD131." />
   <meta name="author" content="James Wright" />
-
   <title>Mission Statement — BYU-Idaho | James Wright</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
+<body class="light">
   <main class="frame">
     <article class="card">
       <header class="hero">
@@ -35,9 +33,18 @@
         </ol>
 
         <div class="logo-wrap" aria-hidden="true">
-          <img src="byui_logo.png" alt="BYU Idaho logo" class="logo">
+          <img src="byui_logo.png" alt="BYU Idaho logo" class="logo" id="logo">
         </div>
       </section>
+
+      <footer class="footer">
+        <label for="theme-select">Theme:</label>
+        <select id="theme-select">
+          <option value="">Choose Mode</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </footer>
     </article>
   </main>
 </body>
