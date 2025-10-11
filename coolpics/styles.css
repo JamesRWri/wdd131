@@ -17,17 +17,32 @@ header {
   color: white;
   text-align: center;
   padding: 1rem;
+  position: relative;
+}
+
+#menuButton {
+  background: white;
+  border: none;
+  color: #4f91c4;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.hide {
+  display: none;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
   margin: 1rem 0 0 0;
-  display: none;
 }
 
 nav ul li {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 nav ul li a {
@@ -44,20 +59,20 @@ main {
 }
 
 .currentwork {
-    text-align: center;
+  text-align: center;
 }
 
-section {
+.gallery {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
-img {
+.gallery img {
   width: 100%;
   height: 300px;
   object-fit: cover;
-  display: block;
+  cursor: pointer;
 }
 
 footer {
@@ -68,19 +83,54 @@ footer {
   margin-top: auto;
 }
 
+/* Modal Styling */
+dialog {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  padding: 0;
+  z-index: 10;
+}
+
+dialog img {
+  display: block;
+  width: 90%;
+  max-height: 100%;
+  margin: 20vh auto;
+}
+
+.close-viewer {
+  position: absolute;
+  top: 20vh;
+  right: 5%;
+  background: white;
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 600px) {
+  #menuButton {
+    display: none;
+  }
+
   nav ul {
     display: flex;
     justify-content: center;
     gap: 1rem;
   }
-  section {
+
+  .gallery {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (min-width: 900px) {
-  section {
+  .gallery {
     grid-template-columns: repeat(3, 1fr);
   }
 }
