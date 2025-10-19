@@ -1,30 +1,43 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, serif;
   margin: 0;
   padding: 0;
-  line-height: 1.6;
+  background-color: white;
   color: #222;
-  background-color: #fafafa;
+  line-height: 1.6;
 }
 
-header, footer {
-  background-color: #222;
-  color: #fff;
-  padding: 1rem;
+header {
   text-align: center;
+  padding: 1rem;
+  border-bottom: 2px solid #e3c9a8;
+}
+
+header h1 {
+  color: #3d023d;
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+nav {
+  border-top: 1px solid #e3c9a8;
+  border-bottom: 1px solid #e3c9a8;
+  padding: 0.5rem 0;
 }
 
 .main-nav {
   list-style: none;
+  margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .main-nav a {
-  color: #ffc107;
+  color: #b30059;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .main-nav a:hover {
@@ -32,48 +45,84 @@ header, footer {
 }
 
 main {
-  padding: 1rem;
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
 }
 
 .book {
   display: grid;
-  gap: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 1rem;
-  max-width: 900px;
-  margin: 1.5rem auto;
+  border-bottom: 2px solid #e3c9a8;
+  padding-bottom: 1rem;
 }
 
 .book-info {
-  text-align: left;
+  text-align: right;
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.book h2 {
+.book-content {
+  text-align: center;
+}
+
+.book-content h2 {
   color: #b30059;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
 }
 
 .book-content img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+  width: 150px;
+  display: block;
+  margin: 0.5rem auto;
+  border-radius: 4px;
 }
 
 .book-content p {
-  margin-top: 0.5rem;
+  margin: 0.5rem auto;
+  max-width: 300px;
 }
 
-@media (min-width: 700px) {
+.author {
+  text-align: center;
+  margin-top: 1rem;
+  color: #444;
+  border-top: 1px solid #e3c9a8;
+  padding-top: 0.5rem;
+}
+
+footer {
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1rem;
+  border-top: 2px solid #e3c9a8;
+}
+
+@media (min-width: 800px) {
   .book {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     align-items: start;
+    column-gap: 2rem;
+  }
+
+  .book-info {
+    text-align: right;
+  }
+
+  .book-content {
+    text-align: left;
   }
 
   .book-content img {
-    width: 90%;
-    margin: 0 auto;
-    display: block;
+    float: left;
+    margin-right: 1rem;
+    width: 180px;
+  }
+
+  .book-content p {
+    margin-top: 0;
   }
 }
