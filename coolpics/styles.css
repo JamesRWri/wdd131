@@ -113,9 +113,34 @@ dialog img {
   cursor: pointer;
 }
 
-@media screen and (min-width: 600px) {
+/* ---- Medium Screens (600–899px) ---- */
+@media screen and (min-width: 600px) and (max-width: 899px) {
   #menuButton {
-    display: none;
+    display: block; /* <-- show button in medium view */
+  }
+
+  nav ul {
+    display: none; /* menu hidden until toggled */
+  }
+
+  nav ul.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: #4f91c4;
+    margin-top: 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---- Large Screens (900px+) ---- */
+@media screen and (min-width: 900px) {
+  #menuButton {
+    display: none; /* hide button on large screens */
   }
 
   nav ul {
@@ -124,12 +149,6 @@ dialog img {
     gap: 1rem;
   }
 
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 900px) {
   .gallery {
     grid-template-columns: repeat(3, 1fr);
   }
