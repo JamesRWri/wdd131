@@ -1,74 +1,88 @@
 import recipes from "./recipes.mjs";
 
-const container = document.getElementById("recipeContainer");
-const searchInput = document.getElementById("searchInput");
-const filterButtons = document.querySelectorAll("button[data-filter]");
-
-const suggestionBox = document.createElement("div");
-suggestionBox.classList.add("suggestions");
-searchInput.parentElement.appendChild(suggestionBox);
-
-function displayRecipes(list) {
-  container.innerHTML = "";
-
-  list.forEach(recipe => {
-    const card = document.createElement("div");
-    card.classList.add("recipe-card");
-
-    card.innerHTML = `
-      <img src="${recipe.image}" alt="${recipe.name}">
-      <h2>${recipe.name}</h2>
-      <p>${recipe.description}</p>
-      <div class="rating">${"★".repeat(Math.round(recipe.rating))}</div>
-    `;
-
-    container.appendChild(card);
-  });
+function random(num) {
+  return Math.floor(Math.random() * num);
 }
 
-displayRecipes(recipes);
+function getRandomListEntry(list) {
+  return list[random(list.length)];
+}
 
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
+function tagsTemplate(tags) {
+  let html = "";
+  tags.forEach(tag => {
+    html += `<li>${tag}</li>`;
+  });
+  return html;
+}
 
-  const filtered = recipes.filter(r =>
-    r.name.toLowerCase().includes(query) ||
-    r.description.toLowerCase().includes(query)
+function ratingTemplate(rating) {
+  let html = `<span class="rating" role="img" aria-label="Rating: ${rating} out of 5 stars">`;
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      html += `<span class="icon-star" aria-hidden="true">⭐</span>`;
+    } else {
+      html += `<span class="icon-star-empty" aria-hidden="true">☆</span>`;
+    }
+  }
+  html += `</span>`;
+  return html;
+}
+
+function recipeTemplate(recipe) {
+  return `
+    <figure class="recipe">
+      <img src="${recipe.image}" alt="${recipe.name}">
+      <figcaption>
+        <ul class="recipe__tags">
+          ${tagsTemplate(recipe.tags)}
+        </ul>
+
+        <h2>${recipe.name}</h2>
+
+        <p class="recipe__ratings">
+          ${ratingTemplate(recipe.rating)}
+        </p>
+
+        <p class="recipe__description">${recipe.description}</p>
+      </figcaption>
+    </figure>
+  `;
+}
+
+function renderRecipes(recipeList) {
+  const output = document.getElementById("recipes");
+  output.innerHTML = recipeList.map(recipeTemplate).join("");
+}
+
+function filterRecipes(query) {
+  query = query.toLowerCase();
+
+  const results = recipes.filter(recipe =>
+    recipe.name.toLowerCase().includes(query) ||
+    recipe.description.toLowerCase().includes(query) ||
+    recipe.tags.find(tag => tag.toLowerCase().includes(query)) ||
+    recipe.ingredients.find(ing => ing.toLowerCase().includes(query))
   );
 
-  displayRecipes(filtered);
+  return results.sort((a, b) => a.name.localeCompare(b.name));
+}
 
-  suggestionBox.innerHTML = "";
-  if (query.length > 0) {
-    filtered.slice(0, 5).forEach(item => {
-      const option = document.createElement("div");
-      option.classList.add("suggestion-item");
-      option.textContent = item.name;
+function searchHandler(event) {
+  event.preventDefault();
 
-      option.addEventListener("click", () => {
-        searchInput.value = item.name;
-        suggestionBox.innerHTML = "";
-        displayRecipes([item]);
-      });
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
 
-      suggestionBox.appendChild(option);
-    });
-  }
-});
+  const filtered = filterRecipes(query);
 
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const type = btn.dataset.filter;
+  renderRecipes(filtered);
+}
 
-    if (type === "all") {
-      displayRecipes(recipes);
-      return;
-    }
+function init() {
+  const recipe = getRandomListEntry(recipes);
+  renderRecipes([recipe]);
+}
 
-    const filtered = recipes.filter(r =>
-      r.tags.includes(type)
-    );
+document.getElementById("searchForm").addEventListener("submit", searchHandler);
 
-    displayRecipes(filtered);
-  });
-});
+init();

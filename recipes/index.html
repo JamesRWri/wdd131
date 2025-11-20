@@ -14,26 +14,21 @@
     <h1>My Recipe Book</h1>
   </header>
 
-  <section class="search-section">
-    <input type="text" id="searchInput" placeholder="Search recipes...">
-    <img src="search.png" class="search-icon" alt="">
-  </section>
+  <main>
+    <form id="searchForm" class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search recipes...">
+      <button id="searchButton" type="submit">Search</button>
+    </form>
 
-  <section class="filter-buttons">
-    <button data-filter="all">All</button>
-    <button data-filter="entree">Entrees</button>
-    <button data-filter="dessert">Desserts</button>
-    <button data-filter="side">Sides</button>
-  </section>
-
-  <main id="recipeContainer" class="recipe-grid"></main>
+    <section id="recipes"></section>
+  </main>
 
   <footer>
     <p>© 2024 My Recipe Book</p>
-    <div class="social-icons">
-      <img src="youtube_icon.svg" alt="">
-      <img src="instagram_icon.svg" alt="">
-      <img src="pinterest_icon.svg" alt="">
+    <div class="socials">
+      <img src="youtube_icon.svg" alt="YouTube">
+      <img src="instagram_icon.svg" alt="Instagram">
+      <img src="pinterest_icon.svg" alt="Pinterest">
     </div>
   </footer>
 
